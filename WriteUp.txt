@@ -1,0 +1,46 @@
+Pipeline Creation:
+------------------
+
+1- Install docker engine in Jenkins Server [ From Offical Documentation].
+
+2- Add Jenkins User to docker group and reboot your system or restart Jenkins service
+
+3- Install aws-cli [ Needed at delivering ]
+
+4- Create IAM user with [AmazonEC2ContainerRegistryFullAccess] and [AmazonECS_FullAccess] attached policies.
+
+5- Create ECR Repo.
+
+6- Install Certain Plugins:
+	- Docker Pipeline
+	- CloudBees Docker Build and Publish 
+	- Amazon ECR
+	- Amazon Web Services SDK
+	- Pipeline [AWS Steps]
+
+7- Store AWS credentials in Jenkins
+	- Global Credentials 
+	- AWS Credentials [Access Key ID and Secret Access Key]
+
+8- Create ECS Cluster using Fargate as Infrastructure method
+
+9- Create Task defination which we can use it in the Service
+		- Container with Image URI
+		- Container Port
+		- App Env is Fargate
+		- CPU and Memory
+
+10- Create ECS Service [ Task will fetch the Image from ECR and run it as a container ] 'More manageable than the service'
+		- Application Type as 'Service'
+		- Family: Task definnition created
+		- Deployment type "Rolling Update"
+		- LoadBalancing:
+			- Application LoadBalancer
+			- Target Group will be your Containers
+			- Listener Port and Health check path
+			- Security Group with rules	 	
+
+ 
+
+ 
+	
